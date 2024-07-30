@@ -1,0 +1,7 @@
+Create Table Bus(BusID Int,Bus_Name varchar(20),Bus_Type varchar(20));
+Insert Into Bus Values(101,'Bus A','Double Decker'),(102,'Bus B','Mini Bus'),(103,'Bus C','Coach');
+Create Table Trips(TripID int,BusID int,TripStatus varchar(20));
+Insert into Trips values(1,101,'Completed'),(2,101,'Delayed'),(3,102,'Completed'),(4,103,'Delayed'),(5,101,'Delayed'),(6,103,'Completed'),(7,102,'Completed'),(8,103,'Delayed');
+Select Bus.BusID,Bus_Name,Bus_Type,Count(TripID) As Completed_Trips From Bus LEFT JOIN Trips ON Bus.BusID = Trips.BusID where TripStatus = 'Completed' Group BY Bus.BusID,Bus_Name,Bus_Type;
+Select Bus.BusID,Bus_Name,Bus_Type,Count(TripID) As Delayed_Trips From Bus LEFT JOIN Trips ON Bus.BusID = Trips.BusID where TripStatus = 'Delayed' Group BY Bus.BusID,Bus_Name,Bus_Type;
+Select Bus.BusID,Bus_Name,Bus_Type,TripID,TripStatus From Bus INNER JOIN Trips ON Bus.BusID = Trips.BusID where TripStatus = 'Completed';
